@@ -1,0 +1,43 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+  validate-and-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Step 1: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Step 2: Setup Node.js Runtime
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Step 3: Install Project Dependencies
+        run: npm install
+
+      - name: Step 4: Run Automated Tests
+        run: npm test
+
+      - name: Step 5: Build and Package Application Artifact
+        run: |
+          mkdir -p dist
+          cp index.html dist/
+          cp -r src dist/
+          echo "Build Timestamp: $(date)" > dist/build_info.txt
+          echo "Packaging completed successfully."
+
+      - name: Step 6: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: web-app-package
+          path: dist/
