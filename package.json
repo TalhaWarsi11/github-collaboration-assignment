@@ -1,0 +1,12 @@
+{
+  "name": "bsit-cicd-web-app",
+  "version": "1.0.0",
+  "description": "BS IT Semester 7 CI/CD Pipeline Web Application",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "node --test"
+  },
+  "keywords": ["github-actions", "cicd"],
+  "author": "Talha Warsi",
+  "license": "MIT"
+}
